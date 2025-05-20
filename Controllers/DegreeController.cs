@@ -35,21 +35,46 @@ namespace Pattern.Controllers
         {
             var degree = new DegreeProgram
             {
+                DegreeProgramId  = DVM.DegreeProgramId,
                 DegreeProgramTitle = DVM.DegreeProgramTitle,
                 IsActive = true,
-
             };
             _degreeRepository.UpdateDegreeProgram(degree);
             return RedirectToAction("Index");
         }
         public IActionResult Edit(int id)
         {
-            return View(id);
+            var degree = _degreeRepository.GetDegreeProgramById(id);
+            if (degree == null)
+            {
+                return NotFound();
+            }
+            var viewModel = new DegreeProgramViewModel
+            {
+                DegreeProgramId = degree.DegreeProgramId,
+                DegreeProgramTitle = degree.DegreeProgramTitle,
+                IsActive = true
+            };
+            return View(viewModel);
         }
                
         public IActionResult Delete(int id)
         {
-            return View(id);
+            var degree = _degreeRepository.GetDegreeProgramById(id);
+            if (degree == null)
+            {
+                return NotFound();
+            }
+
+            var _degree = new DegreeProgram
+            {
+                DegreeProgramId = degree.DegreeProgramId,
+                DegreeProgramTitle = degree.DegreeProgramTitle,
+                IsActive = false
+            };
+           
+            _degreeRepository.UpdateDegreeProgram(_degree);
+            return RedirectToAction("Index");
         }
     }
 }
