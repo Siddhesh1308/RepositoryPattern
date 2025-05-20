@@ -1,1 +1,22 @@
-﻿
+﻿@using Pattern.ViewModels
+@model DegreeProgramViewModel
+
+
+<h2>Edit Degree</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Update" method="post">
+            <input asp-for="@Model.DegreeProgramId" type="hidden" class="form-control" />
+
+            <div class="form-group mb-3">
+                <label asp-for="DegreeProgramTitle" class="form-label"></label>
+                <input asp-for="@Model.DegreeProgramTitle" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+
+

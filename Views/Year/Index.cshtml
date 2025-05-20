@@ -1,1 +1,41 @@
-﻿
+﻿@using Pattern.ViewModels
+@model YearLevelViewModel
+
+<h2>Year Master</h2>
+
+<p>
+    <a href="/Year/Create" class="btn btn-primary">Add Year</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Sr No</th>
+            <th>Degree Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.YearLevels != null && Model.YearLevels.Count > 0)
+        {
+            foreach (var item in Model.YearLevels)
+            {
+                <tr>
+                    <td>@item.YearLevelId</td>
+                    <td>@item.YearLevelTitle</td>
+                    <td>
+                        <a href="/Year/Edit?Id=@item.YearLevelId" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/Year/Delete?Id=@item.YearLevelId" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center">No records found.</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

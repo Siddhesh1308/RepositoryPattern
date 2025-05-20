@@ -1,1 +1,41 @@
-﻿
+﻿@using Pattern.ViewModels
+@model DegreeProgramViewModel
+
+<h2>Degree Master</h2>
+
+<p>
+    <a href="/Degree/Create" class="btn btn-primary">Add Degree</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Sr No</th>
+            <th>Degree Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.DegreePrograms != null && Model.DegreePrograms.Count > 0)
+        {
+            foreach (var item in Model.DegreePrograms)
+            {
+                <tr>
+                    <td>@item.DegreeProgramId</td>
+                    <td>@item.DegreeProgramTitle</td>
+                    <td>
+                        <a href="/Degree/Edit?Id=@item.DegreeProgramId" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/Degree/Delete?Id=@item.DegreeProgramId" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center">No records found.</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

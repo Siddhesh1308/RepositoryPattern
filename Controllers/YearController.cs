@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pattern.Repositories;
+using Pattern.ViewModels;
 
 namespace Pattern.Controllers
 {
@@ -7,13 +8,20 @@ namespace Pattern.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var yearLevels = _yearRepository.GetAllYearLevels();
+            var viewModel = new YearLevelViewModel
+            {
+                YearLevels = yearLevels
+            };
+            return View(yearLevels);
         }
-        public IActionResult Create()
+        public IActionResult Create(YearLevelViewModel YVM)
         {
+
             return View();
         }
-        public IActionResult Save()
+
+        public IActionResult Save(YearLevelViewModel YVM)
         {
 
             return RedirectToAction("Index");
